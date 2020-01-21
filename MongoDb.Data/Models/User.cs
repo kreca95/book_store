@@ -8,5 +8,10 @@ namespace MongoDb.Data.Models
     {
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public DateTime Birth { get; set; }
+        public string RoleId { get; set; }
+
     }
 }

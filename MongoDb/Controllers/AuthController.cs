@@ -26,6 +26,7 @@ namespace MongoDb.Controllers
         [HttpPost]
         public IHttpActionResult Register([FromBody] User user)
         {
+            user.RoleId = "1";
             _userRepository.Add("user", user);
             return Ok(user);
         }
@@ -35,6 +36,14 @@ namespace MongoDb.Controllers
         public IHttpActionResult Login([FromBody] UserLoginModel user)
         {
             var a=_authService.Login(user.UserName, user.Password);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("edit")]
+        public IHttpActionResult EditUser([FromBody] User user)
+        {
+            _userRepository.Update("user", user);
             return Ok();
         }
     }
