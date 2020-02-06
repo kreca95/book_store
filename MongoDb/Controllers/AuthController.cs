@@ -41,6 +41,7 @@ namespace MongoDb.Controllers
 
         [HttpPost]
         [Route("edit")]
+        [Authorize]
         public IHttpActionResult EditUser([FromBody] User user)
         {
             _userRepository.Update("user", user);

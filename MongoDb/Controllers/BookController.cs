@@ -19,6 +19,7 @@ namespace MongoDb.Controllers
         private readonly IMongoDbRepository<Book> _bookRepository = new Repository<Book>();
         private readonly IBookService _bookService = new BookService();
         [HttpPost]
+        [Authorize]
         public  IHttpActionResult Add(AddBookRequest book)
         {
             if (!ModelState.IsValid)
@@ -46,6 +47,7 @@ namespace MongoDb.Controllers
         }
         [HttpDelete]
         [Route("book/{id}")]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteBook(string id)
         {
             _bookRepository.Delete(DatabaseTableNames.Books,  _bookRepository.Get(DatabaseTableNames.Books, id.ToString()));
@@ -55,7 +57,8 @@ namespace MongoDb.Controllers
 
         [HttpPut]
         [Route("book/{id}")]
-        public  IHttpActionResult UpdateBook(string id,[FromBody] Book book)
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult UpdateBook(string id,[FromBody] Book book)
         {
             if (id==book.Id)
             {

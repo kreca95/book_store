@@ -12,6 +12,7 @@ using System.Web.Http;
 namespace MongoDb.Controllers
 {
     [RoutePrefix("rent")]
+    [Authorize(Roles = "Admin")]
     public class RentController : ApiController
     {
         private readonly IRentService _rentService;
@@ -29,19 +30,19 @@ namespace MongoDb.Controllers
             rent.Id = bookActionRequest.Id;
             rent.BookId = bookActionRequest.BookId;
             rent.UserId = bookActionRequest.UserId;
-            if (bookActionRequest.Action=="return")
+            if (bookActionRequest.Action == "return")
             {
                 rent.Returned = true;
                 rent.DateReturned = DateTime.Now;
                 _rentService.ReturnBook(rent);
             }
-            else if (bookActionRequest.Action=="rent")
+            else if (bookActionRequest.Action == "rent")
             {
                 rent.DateRented = DateTime.Now;
                 rent.Returned = false;
                 _rentService.RentBook(rent);
             }
-            
+
             return Ok();
         }
     }
