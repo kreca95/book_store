@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using MongoDb.Data.Models;
+using MongoDB.Bson;
 
 namespace MongoDb.Service.Interfaces
 {
@@ -9,5 +10,7 @@ namespace MongoDb.Service.Interfaces
     {
         void RentBook(Rent rent);
         void ReturnBook(Rent rent);
+        List<Rent> GetRents();
+        Rent GetRent(string id);
     }
 }

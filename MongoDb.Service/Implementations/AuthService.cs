@@ -21,8 +21,8 @@ namespace MongoDb.Service.Implementations
 
         public User Login(string username, string password)
         {
-            var user = _context.GetCollection<User>("user").Find(x=> x.Email==username && x.Password==password).FirstOrDefault();
-            user.Role.Name = "Admin";
+            var user = _context.GetCollection<User>("user").Find(x => x.Email == username && x.Password == password).FirstOrDefault();
+            //user.Role.Name = "Admin";
             return user;
         }
         public void Register(User user)

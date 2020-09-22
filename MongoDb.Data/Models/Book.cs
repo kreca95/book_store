@@ -7,7 +7,7 @@ using System.Web;
 
 namespace MongoDb.Models
 {
-    public class Book:EntityBase
+    public class Book : EntityBase
     {
         public string Name { get; set; }
         public DateTime Published { get; set; }

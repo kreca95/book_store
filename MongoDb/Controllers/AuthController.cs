@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Web.Http;
 
 namespace MongoDb.Controllers
@@ -39,13 +40,18 @@ namespace MongoDb.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        [Route("edit")]
+        [HttpPut]
         [Authorize]
         public IHttpActionResult EditUser([FromBody] User user)
         {
             _userRepository.Update("user", user);
             return Ok();
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetUsers()
+        {
+            return Ok(_userRepository.GetAll("user"));
         }
     }
 }
